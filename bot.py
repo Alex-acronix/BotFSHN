@@ -10,7 +10,7 @@ from telegram.ext import (
 )
 
 TOKEN = "8383502918:AAEo3ofVGWgGU_vaT41_JYgacl_4g5fwJ4A"
-ADMIN_IDS = [1295790888, 937454085, 730833899]  # додавай сюди всіх адмінів
+ADMIN_IDS = [1295790888, 937454085, 730833899, 2112719948]  # додавай сюди всіх адмінів
 
 NAME, FACULTY, COURSE, MOTIVATION = range(4)
 
