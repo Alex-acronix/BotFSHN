@@ -10,7 +10,7 @@ from telegram.ext import (
 )
 
 TOKEN = "8383502918:AAEo3ofVGWgGU_vaT41_JYgacl_4g5fwJ4A"
-ADMIN_ID = 1295790888  # твій Telegram ID
+ADMIN_IDS = [1295790888, 937454085, 730833899]  # додавай сюди всіх адмінів
 
 NAME, FACULTY, COURSE, MOTIVATION = range(4)
 
@@ -20,7 +20,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "Привіт! 👋\n"
         "Це бот набору в раду студентського самоврядування.\n\n"
-        "Як тебе звати?"
+        "Як тебе звати (потрібно вказати ім'я та прізвище)?"
     )
     return NAME
 
@@ -45,16 +45,17 @@ async def motivation(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
     text = (
         "📥 Нова заявка:\n\n"
-        f"👤 Ім’я: {context.user_data['name']}\n"
+        f"👤 Ім’я та прізвище: {context.user_data['name']}\n"
         f"🏫 Спеціальність: {context.user_data['faculty']}\n"
         f"🎓 Курс: {context.user_data['course']}\n"
         f"💬 Мотивація: {context.user_data['motivation']}\n"
         f"🔗 Telegram: @{user.username}"
     )
 
-    await context.bot.send_message(chat_id=ADMIN_ID, text=text)
-    await update.message.reply_text("Дякуємо! Твоя заявка надіслана ✅")
+    for admin_id in ADMIN_IDS:
+        await context.bot.send_message(chat_id=admin_id, text=text)
 
+    await update.message.reply_text("Дякуємо! Твоя заявка надіслана ✅")
     return ConversationHandler.END
 
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
