@@ -8,9 +8,10 @@ from telegram.ext import (
     ContextTypes,
     filters
 )
+import os
 
-TOKEN = "8383502918:AAEo3ofVGWgGU_vaT41_JYgacl_4g5fwJ4A"
-ADMIN_IDS = [1295790888, 937454085, 730833899, 2112719948, 725297705]
+TOKEN = os.getenv("TOKEN")
+ADMIN_IDS = list(map(int, os.getenv("ADMIN_IDS").split(",")))
 
 (
     NAME,
@@ -145,3 +146,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
